@@ -12,11 +12,21 @@ test("Swag Labs", async ({ page }) => {
   const productTitle = page.locator(".title");
   await expect(productTitle).toBeVisible();
 
-  //Multiple
-  const links = await page.$$('a');
-  for (const link of links) {
-    const linkText = await link.textContent();
-    console.log(linkText);
-  }
+//   //Multiple
+//   const links = await page.$$('a');
+//   for (const link of links) {
+//     const linkText = await link.textContent();
+//     console.log(linkText);
+//   }
+
+const products = await page.$$(
+    "//div[@class='inventory_list']//div[@class='inventory_item_name ']"
+);
+for (const product of products){
+    const productName = await product.textContent();
+    console.log(productName);
+}
+
+});
 
 
