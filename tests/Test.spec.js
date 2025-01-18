@@ -1,32 +1,27 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
-test("Swag Labs", async ({ page }) => {
-  await page.goto("https://www.saucedemo.com/");
-  await expect(page).toHaveTitle("Swag Labs");
-
-
-  //single
-  await page.locator("#user-name").fill("standard_user");
-  await page.locator("#password").fill("secret_sauce");
-  await page.locator("(//input[@id='login-button'])").click();
-  const productTitle = page.locator(".title");
-  await expect(productTitle).toBeVisible();
-
-//   //Multiple
-//   const links = await page.$$('a');
-//   for (const link of links) {
-//     const linkText = await link.textContent();
-//     console.log(linkText);
-//   }
-
-const products = await page.$$(
-    "//div[@class='inventory_list']//div[@class='inventory_item_name ']"
-);
-for (const product of products){
-    const productName = await product.textContent();
-    console.log(productName);
-}
-
+test('test', async ({ page }) => {
+  await page.goto('https://www.saucedemo.com/');
+  await page.locator('[data-test="username"]').click();
+  await page.locator('[data-test="username"]').fill('standard_user');
+  await page.locator('[data-test="password"]').click();
+  await page.locator('[data-test="password"]').fill('secret_sauce');
+  await page.locator('[data-test="login-button"]').click();
+  await page.locator('[data-test="item-4-title-link"]').click();
+  await page.locator('[data-test="add-to-cart"]').click();
+  await page.locator('[data-test="shopping-cart-link"]').click();
+  await page.locator('[data-test="checkout"]').click();
+  await page.locator('[data-test="firstName"]').click();
+  await page.locator('[data-test="firstName"]').press('CapsLock');
+  await page.locator('[data-test="firstName"]').fill('ABC');
+  await page.locator('[data-test="lastName"]').click();
+  await page.locator('[data-test="lastName"]').fill('EF');
+  await page.locator('[data-test="postalCode"]').click();
+  await page.locator('[data-test="postalCode"]').fill('2322');
+  await page.locator('[data-test="continue"]').click();
+  await page.locator('[data-test="finish"]').click();
+  await page.locator('[data-test="back-to-products"]').click();
+  await page.getByRole('button', { name: 'Open Menu' }).click();
+  await page.locator('[data-test="logout-sidebar-link"]').click();
 });
-
 
